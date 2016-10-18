@@ -59,7 +59,8 @@ class Maze
 	def putRoomOnMaze(room)
 		key = getKey(room.positionX,room.positionY)
 		@maze.store(key,room)
-		#puts "ALTA de HABITACION "+key+" --> ["+room.id.to_s+"] "+room.outs.to_s
+		puts "ALTA de HABITACION "+key+" --> ["+room.id.to_s+"] "+room.outs.to_s
+		puts " "
 	end
 
 	def getDefOuts(x,y)
@@ -73,7 +74,7 @@ class Maze
 		return origin
 	end
 
-	def isNewRoom?(outs)
+	def isNewRoom(outs)
 		return (outs == [-1,-1,-1,-1])
 	end
 
@@ -129,11 +130,6 @@ class Maze
 		return y
 	end
 
-	# Choose parameters form teh new Room
-	def chooseRoom(outs, thisX, thisY, nextX, nextY, movement, opositeDoor)
-		return outs, thisX, thisY, nextX, nextY, movement, opositeDoor
-	end
-
 
 	def createMaze(size)
 		thisX=0
@@ -141,77 +137,69 @@ class Maze
 		nextX=0
 		nextY=0
 		previusRoom=[]
-		previusDoor=[]
-		opositeDoor = -1
 
-		# Building a Maze with size-Rooms
 		for idRoom in 0..size-1
 
 			thisX =nextX
 			thisY =nextY
 			previusRoom[idRoom]=getKey(thisX,thisY)
-					
-#------
-			outs = getDefOuts(thisX,thisY)
-			if (opositeDoor!=-1)  
-				outs[opositeDoor] = previusRoom[idRoom-1]
-			end
-
-			isNewRoom = isNewRoom?(outs)
-
 			# choose the door to go to the next 
 			movement = chooseNextDoor
-			if (!isNewRoom)
-				# if i revisit a old room 
-				# choose an un-used door
-				while (outs[movement]!=-1)
-					movement = chooseNextDoor
-				end
-			end
 			nextX = changeX(movement, thisX)
 			nextY = changeY(movement, thisY)
+
+			puts " Movimiento "++movement.to_s+" == Parto de "+ getKey(thisX,thisY)+" --to-> "+getKey(nextX,nextY)
+			# teke the outs of the door x,y
+			outs = getDefOuts(thisX,thisY)
 			opositeDoor = chooseOpositeDoor(movement)
-			
-#-------			
-				
+
 			#i'm building the id=i Room
 			if (idRoom==0)
 				# Start of the Maze				
 				# add new out-door to outs array
 				outs[movement] = getKey(nextX,nextY)
+				#create and add the Room
+				putRoomOnMaze(Room.new(idRoom, outs, thisX, thisY))
+			elsif (idRoom==size-1)
+				puts "Previa ("+previusRoom[idRoom-1]+") ---> opositeDoor: "+opositeDoor.to_s 
+				# End of the Maze
+				# In this Room the door wich you come is the opposite of the door where you come from
+				# add new out-door to outs array
+				outs[opositeDoor] = previusRoom[idRoom-1]
+				#create and add the Room
+				putRoomOnMaze(Room.new(idRoom, outs, thisX, thisY))
+			elsif
 
-			elsif (idRoom>0 )
-
-				# In the middle of the Maze				
+				# In the middle of the Maze
+				outs[opositeDoor] = previusRoom[idRoom-1]
 				nextRoom = getKey(nextX,nextY)
-				# Repeat the eleccion of nextRoom to avoid the comeBack to the previous Room
+				puts "Previa ("+previusRoom[idRoom-1]+") ---> opositeDoor: "+opositeDoor.to_s
+				# Repite the eleccion of nextRoom to avoid the comeBack to the previous Room
 				while (previusRoom[idRoom-1] == nextRoom)
 					outs[opositeDoor] = -1
-					outs = getDefOuts(thisX,thisY)
 					movement = chooseNextDoor
 					nextX = changeX(movement, thisX)
 					nextY = changeY(movement, thisY)
-					opositeDoor = chooseOpositeDoor(movement)					
-					nextRoom = getKey(nextX,nextY)				
-				end	
-				if (idRoom==size-1)	
-					outs[movement] = "END"
-				else
-					outs[movement] = nextRoom
+					outs = getDefOuts(thisX,thisY)
+					opositeDoor = chooseOpositeDoor(movement)
+					outs[opositeDoor] = previusRoom[idRoom-1]
+					nextRoom = getKey(nextX,nextY)
+					puts " Movimiento "++movement.to_s+" == Parto de "+ getKey(thisX,thisY)+" --to-> "+getKey(nextX,nextY)
+					puts "Previa ("+previusRoom[idRoom-1]+") ---> opositeDoor: "+opositeDoor.to_s
 				end
-
+				
+				outs[movement] = nextRoom
+				
+				# put the id of the next room in the correct direction			
+				putRoomOnMaze(Room.new(idRoom, outs, thisX, thisY))
 			end
-			# put the id of the next room in the correct direction	
-			putRoomOnMaze(Room.new(idRoom, outs, thisX, thisY))
 
 		end
 	end
+
+
+	
 end
-
-
-
-
-
 
 class Player 
 	attr_accessor :lives
@@ -226,12 +214,11 @@ end
 
 class MazeGame
 	attr_reader :myMaze
-	attr_reader :player	
+	attr_reader :player
 
 	def initialize(size, player)
 		@myMaze = Maze.new(size)
 		@player = player
-		@fin =false
 	end
 
 	def startGame
@@ -245,7 +232,7 @@ class MazeGame
 		puts " "
 
 		# Allways start in the zero 0 Romm
-		while ((@player.lives > 0)&&(!@fin))
+		while (@player.lives > 0)
 			puts " "
 			puts " You have #{@player.lives} LIVES"
 			playRoom = @myMaze.getRoom(@player.playerRoom)
@@ -264,14 +251,7 @@ class MazeGame
 			end
 			if (playRoom.canYouGoOut?(direction))
 				puts " ¡¡ Perfect !! You find the rigth door ..."
-				idRoom = playRoom.roomInDirection(direction)
-				if (idRoom != "END")
-					@player.playerRoom = idRoom
-				else
-					fin = true
-					puts " Congratulations !! YOU FIND THE OUT FOR THE MAZE !!!"
-					puts " ...................................................."
-				end
+				@player.playerRoom= playRoom.roomInDirection(direction)
 			else
 				puts " Sorry you choose the fake door !!"
 				@player.lives=@player.lives-1
@@ -284,5 +264,5 @@ class MazeGame
 end
 
 
-MazeGame.new(10,Player.new(3)).startGame
-#puts MazeGame.new(10,Player.new(3)).myMaze.to_s
+#MazeGame.new(10,Player.new(3)).startGame
+puts MazeGame.new(10,Player.new(3)).myMaze.to_s
