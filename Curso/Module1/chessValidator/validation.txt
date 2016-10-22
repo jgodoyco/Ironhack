@@ -1,0 +1,12 @@
+MOVEMENT [wP]: ["a2", "a3"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [wP]: ["a2", "a4"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [wP]: ["a2", "a5"] ---> ILLEGAL ,reason: NO pieces there BUT unfortunatly the movement is NOT correct
+MOVEMENT [bP]: ["a7", "a6"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [bP]: ["a7", "a5"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [bP]: ["a7", "a4"] ---> ILLEGAL ,reason: NO pieces there BUT unfortunatly the movement is NOT correct
+MOVEMENT [bP]: ["a7", "b6"] ---> ILLEGAL ,reason: NO pieces there BUT unfortunatly the movement is NOT correct
+MOVEMENT [bN]: ["b8", "a6"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [bN]: ["b8", "c6"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT [bN]: ["b8", "d7"] ---> ILLEGAL ,reason: fakeMode: There is a same colour piece on destination. You can not MOVE THERE
+MOVEMENT [wP]: ["e2", "e3"] ---> LEGAL ,reason: NO pieces in the destination & the movement is OK
+MOVEMENT []: ["e3", "e2"] ---> ILLEGAL ,reason: There is NO pieces in the origin position to MOVE
