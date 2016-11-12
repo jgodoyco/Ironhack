@@ -1,0 +1,16 @@
+<html>
+<title>Registro</title>
+<body>
+
+	<h1><font color=red> REGISTRO </font></h1>
+	<h3>Mensaje: <%= @message %></h3>
+
+	<form action="/register" method="POST">
+	  <input type="user" name="username" placeholder="User Name"> +
+	  <input type="password" name="password" placeholder="password">
+	  <button type="submit">Register</button>
+	</form>
+
+	<h3>Si quiere logarse pulse <a href='./index'>aqui</a></h3>
+
+</body>

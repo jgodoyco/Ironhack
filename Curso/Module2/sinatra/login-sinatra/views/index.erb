@@ -1,0 +1,18 @@
+<html>
+<title>Login</title>
+<body>
+	<h1>LOGIN</h1>
+
+	<% if ((@message != nil)&&(@message != "") )%>
+		<h3>Mensaje: <%= @message %></h3>
+	<% end %>
+
+	<form action="/log_in" method="POST">
+	  <input type="user" name="username" placeholder="User Name"> +
+	  <input type="password" name="password" placeholder="password">
+	  <button type="submit">Login</button>
+	</form>
+
+	<h3>Si quiere registrarse pulse <a href='/register'>aqui</a></h3>
+
+</body>
