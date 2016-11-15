@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create New Task</title>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+</style>
+</head>
+
+<body>
+
+<ul>
+  <li><a href="/">Display</a></li>
+  <li><a href="/new_task">Create</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+
+<h1> Create New Task !!</h1>
+<h2> This is a new Task for <font color=red><%=@todo.nameList%>'s</font> task list !!</h2>
+
+<form action="/create_task" method="POST">
+  <fieldset>
+    <legend>New Task:</legend>
+    Content:<br>
+    <input type="text" name="content" value="">
+    <br>
+    Id:<br>
+    <input type="text" name="id" value="<%=Task.get_current_id %>" readonly>
+    <br><br>
+    <input type="submit" value="Create Task">
+  </fieldset>
+</form>
+
+</body>
+</html>

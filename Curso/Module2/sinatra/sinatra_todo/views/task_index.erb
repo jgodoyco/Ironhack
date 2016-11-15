@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Display Task Index</title>
+<style>
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#t01 th {
+    background-color: black;
+    color: white;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="/">Display</a></li>
+  <li><a href="/new_task">Create</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+<h1> Welcome to the TodoList !!</h1>
+<h2> This is <font color=red><%=@todo.nameList%>'s</font> task list !!</h2>
+
+<table id="t01">
+  <tr>
+    <th>Content</th>
+    <th>Id</th> 
+    <th>Completed</th>
+    <th>Created_at</th>
+    <th>Updated_at</th>
+    <th>Action</th>
+  </tr>
+
+  <%  @todo.tasks.each do |task| %>
+  
+    <tr>
+      <td><%=task.content%></td>
+      <td><%=task.id%></td>
+      <td><%=task.completed%></td>
+      <td><%=task.created_at%></td>
+      <td><%=task.updated_at%></td>
+      <td><form action="/delete_task" method="POST">
+          <input name="id_task" type="hidden" value="<%=task.id%>">
+          <input type="submit" value="Delete Task"></form>
+      </td>
+    </tr>
+
+  <% end %>
+
+</table>
+
+</body>
+</html>
