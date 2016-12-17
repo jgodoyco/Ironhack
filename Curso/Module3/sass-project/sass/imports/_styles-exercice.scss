@@ -1,0 +1,102 @@
+
+$header_back_color: #00bfff;
+$header_border_color: #0A77E9;
+$header_button_color: #009;
+
+.header_style {
+
+  border: 1px solid $header_border_color;
+  background-color: $header_back_color;
+  display: flex;
+  height: 300px;
+  flex-direction: row;
+  flex-wrap: wrap;
+/*   flex-wrap: nowrap; */
+/*   flex-wrap: wrap-reverse; */
+/*   justify-content: flex-start; */
+/*   justify-content: flex-end; */
+  justify-content: center; 
+/*   justify-content: space-between; */
+/*   justify-content: space-around; */
+/*   align-items: stretch; */
+/*   align-items: flex-start; */
+/*   align-items: flex-end; */
+  align-items: center; 
+/*   align-items: baseline; */
+/*   align-content: stretch; */
+/*   align-content: flex-start; */
+/*   align-content: flex-end; */
+  align-content: center;
+/*   align-content: space-around; */
+/*   align-content: space-between; */
+
+}
+
+.himage_style {
+
+  border: 1px solid $header_border_color;
+  display: flex;
+  height: 100px;
+  width: 200px;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.menu_style {
+  border: 1px solid $header_border_color;
+  display: flex;
+  height: 100px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center; 
+}
+
+.item{
+  display: flex;
+  color: white;
+  font-family: sans-serif;
+  background: $header_button_color;
+  border-radius: 6px;
+  width: 20%;
+  height: 40px;
+  align-content: center;
+  align-items: center;
+  justify-content: center; 
+  font-size: 20px;
+}
+
+
+$article_back_color: white;
+$article_border_color: red;
+$article_button_color: #009;
+
+.article_style{
+  border: 1px solid $article_border_color;
+  background-color: $article_back_color;
+  display: flex;
+  height: 600px;
+  width: 80%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10%;
+  padding: 5px 15px;
+  align-content: center;
+  align-items: center;
+  justify-content: center; 
+
+}
+
+.wproduct{
+  display: flex;
+  background-color: $article_back_color;
+  border: 1px solid $article_border_color;
+  border-radius: 6px;
+  width: 30%;
+  height: 200px;
+  align-content: center;
+  align-items: center;
+  justify-content: center; 
+}
