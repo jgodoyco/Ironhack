@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   	get '/', to: 'site#home'
 	get 'contact/', to: 'site#contact'
+
 	get 'calculator/', to: 'calculator#calculator'
 	post 'calculate/', to: 'calculator#calculate'
+
+	get '/projects', to: "projects#index"
   	
 end
