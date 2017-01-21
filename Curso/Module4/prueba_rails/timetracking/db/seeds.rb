@@ -17,3 +17,17 @@ Project.create!(name: "Running", description: "Are you mad?")
 Project.create!(name: "Home", description: "wife&sons")
 Project.create!(name: "BBVA", description: "job principal")
 Project.create!(name: "Ironhack", description: "Description")
+
+project = Project.first
+project.time_entries.create(hours: 24, minutes: 24, comments: "nada", Date.today )
+project.time_entries.create(hours: 12, minutes: 12, comments: "nada", Date.today )
+
+project2 = Project.where("name='Reading'")[0]
+project2.time_entries.create(hours: 23, minutes: 23)
+project2.time_entries.create(hours: 13, minutes: 13)
+
+project3 = Project.where("name='Home'")[0]
+5.times do |index|
+	project3.time_entries.create(hours: (2+index), minutes: (2+index))
+	project3.time_entries.create(hours: (10+index), minutes: (10+index))
+end
