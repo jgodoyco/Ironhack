@@ -1,0 +1,18 @@
+<p>New product for de User <%= @user.name %></p>
+
+<%= form_for [@user, @product] do |u|  %>
+
+	<%= u.label :title %>
+	<%= u.text_field :title %>
+
+	<%= u.label :description %>
+	<%= u.text_field :description %>
+
+	<%= u.label :deadline %>
+	<%= u.date_field :deadline %>
+
+	<%= u.button 'Save' %>
+		
+<% end %>
+
+<p><a href="/users/<%= @user.id %>/products">Return to Product List of <%= @user.name %></a></p>

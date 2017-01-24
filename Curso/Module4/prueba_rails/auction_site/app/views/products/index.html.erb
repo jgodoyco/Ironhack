@@ -1,0 +1,19 @@
+<h1>User Products</h1>
+<p>Products List</p>
+
+<h1>Usuario <%= @user.name%> </h1>
+<ul>
+	<% @products.each do |product| %>
+		<li> <a href="/users/<%= @user.id %>/products/<%= product.id %>"> <%= product.title %></a> - 
+			<% if product.description.present? %>				
+				<%= product.deadline %> - 
+				<%= link_to('Delete Product', user_product_path(@user,product.id),
+				method: :delete, data: {confirm: 'Are you sure?'}) %>
+			<% end%> 
+		</li>
+	<% end %>
+</ul>
+
+<p>	<%= link_to('Add new user product', new_user_product_path(@user.id) ) %>
+</p>
+<p>	<a href="/users/">Return User list</a></p>
