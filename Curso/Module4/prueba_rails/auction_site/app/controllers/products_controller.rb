@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
 	def show
 		@user = user
 		@product = product
+		@bid = Bid.new
+		@bids = product.bids
 		render 'show'
 	end
 

@@ -3,21 +3,35 @@
 
 <h1><%= @product.title %> - <%= @user.name %></h1> 
 <p>This is the Product with id: <b><%= @product.id %></b> </p>
-<p>- <%= @product.description %></p> <p>- <%= @product.created_at %></p>
+<p>- <%= @product.description %></p> <p>- Created AT: <%= @product.created_at %></p>
 
-<!--<p> <a href= <%= "#{new_user_product_bid_path(@user, @product)}" %> >Bid on Product</a> </p> -->
+<h1>Actives Bids</h1>
 
-<%= form_for [@bid] do |b|  %>
+<ul>
+	<% if @bids != nil %>
+		<% @bids.each do |bid| %>
+			<li> 
+				<p>amount: <%= bid.amount %> - user_ID : 
+				<%= bid.user_id %> </p>
+			</li>
+		<% end %>
+	<% else %>
+		<p>NO ACTIVE BIDS</p>
+	<% end %>
+</ul>
+
+<h1>Create a new Bid to this Product:</h1>
+
+<%= form_for [@product, @bid] do |b|  %>
 
 	<%= b.label :amount %>
-	<%= b.text_field :amount %>
+	<%= b.number_field :amount %>
 
-	<%= b.label :email %>
-	<%= b.text_field :email %>
+	<%= label_tag :email %>
+	<%= text_field_tag :email %>
 
 	<%= b.button 'Save' %>
 	
-	
 <% end %>
 
-<p> <a href= <%= "#{user_products_path(@user)}" %>>RETURN LIST</a> </p>
+<p> <a href= <%= "#{user_products_path(@user)}" %> >RETURN LIST</a> </p>
