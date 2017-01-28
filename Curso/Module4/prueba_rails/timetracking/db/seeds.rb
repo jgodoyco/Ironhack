@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Project.destroy_all
+Person.destroy_all
+Participation.destroy_all
 
 Project.create!(name: "Shopping", description: "Make the horrible Shopping")
 Project.create!(name: "Reading", description: "Take the e-reader and enjoy")
@@ -18,10 +21,6 @@ Project.create!(name: "Home", description: "wife&sons")
 Project.create!(name: "BBVA", description: "job principal")
 Project.create!(name: "Ironhack", description: "Description")
 
-project = Project.first
-project.time_entries.create(hours: 24, minutes: 24, comments: "nada", Date.today )
-project.time_entries.create(hours: 12, minutes: 12, comments: "nada", Date.today )
-
 project2 = Project.where("name='Reading'")[0]
 project2.time_entries.create(hours: 23, minutes: 23)
 project2.time_entries.create(hours: 13, minutes: 13)
@@ -31,3 +30,15 @@ project3 = Project.where("name='Home'")[0]
 	project3.time_entries.create(hours: (2+index), minutes: (2+index))
 	project3.time_entries.create(hours: (10+index), minutes: (10+index))
 end
+
+project = Project.first
+project.time_entries.create!(hours: 24, minutes: 24, comments: 'nada', date: Date.today )
+project.time_entries.create!(hours: 12, minutes: 12, comments: 'nada', date: Date.today )
+
+
+Person.create!(name: "Pedro", edad: 26)
+Person.create!(name: "Juan", edad: 26)
+Person.create!(name: "Maria", edad: 24)
+Person.create!(name: "Juan", edad: 25)
+Person.create!(name: "Carlos", edad: 30)
+Person.create!(name: "Ana", edad: 28)

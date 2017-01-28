@@ -5,4 +5,19 @@
 <p>This is the Product with id: <b><%= @product.id %></b> </p>
 <p>- <%= @product.description %></p> <p>- <%= @product.created_at %></p>
 
-<p> <a href="/">RETURN LIST</a> </p>
+<!--<p> <a href= <%= "#{new_user_product_bid_path(@user, @product)}" %> >Bid on Product</a> </p> -->
+
+<%= form_for [@bid] do |b|  %>
+
+	<%= b.label :amount %>
+	<%= b.text_field :amount %>
+
+	<%= b.label :email %>
+	<%= b.text_field :email %>
+
+	<%= b.button 'Save' %>
+	
+	
+<% end %>
+
+<p> <a href= <%= "#{user_products_path(@user)}" %>>RETURN LIST</a> </p>
