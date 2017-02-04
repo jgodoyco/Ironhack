@@ -1,0 +1,11 @@
+<h1>Search Film</h1>
+<p>Welcome to the most exciting Film Forum</p>
+
+<p>Look for a film</p>
+
+<%= form_tag movies_search_path, method: 'post' do %>
+ 	<%= label_tag(:title, "Search for:") %>
+   <%= text_field_tag :title %>
+   
+   <%= submit_tag "Search" %>
+<% end %>

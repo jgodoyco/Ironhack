@@ -1,0 +1,30 @@
+<h1>Show Film</h1>
+<p>Film description id:<%= @movie.id %> </p>
+
+<ul>
+	<li> Title: <%= @movie.title %> </li>
+	<li> Year: <%= @movie.year %> </li>
+	<% if @movie.sypnosis != nil %>
+		<li> Sypnosis: <%= @movie.sypnosis %> </li>
+	<% end %>
+	<% if @movie.poster!= nil %>
+		<li>Poster: <%= image_tag@movie.poster(:thumb) %></li>
+	<% end %>
+</ul>
+
+<p>Comments:</p>
+
+<% if @comments != [] %>
+	<% @comments.each do |comment| %>
+		<ul>
+			<li> Comment: <%= comment.comment %> -
+			User: <%= comment.username %> -
+			Created At: <%= comment.created_at %> 						
+			</li>
+		</ul>
+	<% end %>
+<% else %>
+	<p>Sorry!!! There is NOT Comments to this Film</p>
+<% end %>
+
+<%= link_to("Add a new Comment", new_movie_comment_path(:movie_id => @movie.id), :method => :get )%>

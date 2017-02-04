@@ -1,0 +1,17 @@
+<h1>Film Comment</h1>
+<p>Comment description for Film: <%= @movie.title%> </p>
+
+
+<%= form_tag new_movie_comment_path, method: 'get' do %>
+
+	<%= label_tag :username,  "User name:" %>
+	<%= text_field_tag :username %>
+
+	<%= label_tag :comment, "Comment description:" %>
+	<%= text_field_tag :comment %>
+
+	<%= label_tag :movies_id, "Film Id:" %>
+	<%= text_field_tag :movies_id, @movie.id, :readonly => true, :disabled=>true %>
+   
+   <%= submit_tag "Save Comment" %>
+<% end %>

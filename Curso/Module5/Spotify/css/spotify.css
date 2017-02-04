@@ -1,0 +1,21 @@
+#menuContainer {
+	width: 1512;
+	height: 46;
+	color: red;
+
+}
+
+.divTracksFloat {
+	    margin-left: auto;
+	    margin-right: auto;
+	    width:500px;
+  		border:solid 1px red;
+  		background-color: #fff;
+		  opacity: 0.8;
+		  filter: alpha(opacity=80);
+		  display: none;
+		  position: absolute;
+		  top: 100px;
+		  left: 40%;
+		  clear: both;
+		}	

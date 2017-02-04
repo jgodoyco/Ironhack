@@ -1,0 +1,25 @@
+<h1>Film data Search</h1>
+<p>Film description</p>
+
+<% if @movies != nil %>
+	<% @movies.each do |movie| %>
+		<ul>
+			<li> Title: <%= movie.title %> -
+			Year: <%= movie.year %> -
+			Sypnosis: <%= movie.sypnosis %> 
+			<% if movie.poster!= nil %>
+				Poster: <%= image_tag@movie.poster(:thumb) %>
+			<% end %>
+			<%= link_to("Start a discussion", movies_update_path(:title => movie.title, :year => movie.year, :poster => movie.poster, :sypnosis => movie.sypnosis), :method => :put )%>
+			 </li>
+		</ul>
+	<% end %>
+<% else %>
+	<p>Sorry!!! There is NOT Films with this title</p>
+<% end %>
+
+
+
+
+
+
